@@ -20,7 +20,23 @@ export default function Home() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1>질문 사이트 (관리자 답변 기능 포함)</h1>
+<img 
+      src="https://placekitten.com/400/200" 
+      alt="귀여운 고양이" 
+      style={{ marginBottom: '1rem', borderRadius: '8px' }}
+    />
 
+    {/* 질문 입력 폼 */}
+    <form onSubmit={handleSubmit}>
+      {/* ... */}
+    </form>
+
+    {/* 질문 리스트 */}
+    <ul style={{ marginTop: '2rem' }}>
+      {/* ... */}
+    </ul>
+  </div>
+);
       {/* 질문 입력 폼 */}
       <form onSubmit={handleSubmit}>
         <input
@@ -58,3 +74,4 @@ export default function Home() {
     </div>
   );
 }
+

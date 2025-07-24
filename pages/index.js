@@ -12,23 +12,18 @@ export default function Home() {
   };
 
   const handleAnswerChange = (idx, value) => {
-    const newQuestions = [...questions];
-    newQuestions[idx] = { ...newQuestions[idx], answer: value }; // 불변성 유지해서 업데이트
-    setQuestions(newQuestions);
+    // 불변성 유지해서 새 객체로 업데이트
+    setQuestions(prevQuestions => {
+      const newQuestions = [...prevQuestions];
+      newQuestions[idx] = { ...newQuestions[idx], answer: value };
+      return newQuestions;
+    });
   };
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>질문 사이트 (관리자 답변 기능 포함)</h1>
+      <h1>질문 사이트</h1>
 
-      {/* 고양이 사진 */}
-      <img
-        src="https://placekitten.com/400/200"
-        alt="귀여운 고양이"
-        style={{ marginBottom: '1rem', borderRadius: '8px' }}
-      />
-
-      {/* 질문 입력 폼 */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -42,7 +37,6 @@ export default function Home() {
         </button>
       </form>
 
-      {/* 질문 및 답변 리스트 */}
       <ul style={{ marginTop: '2rem' }}>
         {questions.map((q, idx) => (
           <li key={idx} style={{ marginBottom: '1.5rem' }}>

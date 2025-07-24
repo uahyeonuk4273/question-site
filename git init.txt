@@ -1,0 +1,3 @@
+git init
+git add .
+git commit -m "처음 커밋"

@@ -12,11 +12,10 @@ export default function Home() {
   };
 
   const handleAnswerChange = (idx, value) => {
-    // 불변성 유지해서 새 객체로 업데이트
-    setQuestions(prevQuestions => {
-      const newQuestions = [...prevQuestions];
-      newQuestions[idx] = { ...newQuestions[idx], answer: value };
-      return newQuestions;
+    setQuestions(prev => {
+      const newQs = [...prev];
+      newQs[idx] = { ...newQs[idx], answer: value };
+      return newQs;
     });
   };
 
@@ -39,7 +38,7 @@ export default function Home() {
 
       <ul style={{ marginTop: '2rem' }}>
         {questions.map((q, idx) => (
-          <li key={idx} style={{ marginBottom: '1.5rem' }}>
+          <li key={idx} style={{ marginBottom: '2rem' }}>
             <strong>Q:</strong> {q.text}
             <div style={{ marginTop: '0.5rem' }}>
               <label>
@@ -51,6 +50,10 @@ export default function Home() {
                   style={{ width: '100%', marginTop: '0.25rem' }}
                 />
               </label>
+              {/* 여기에 답변 내용을 텍스트로 보여주기 */}
+              <p style={{ marginTop: '0.5rem', whiteSpace: 'pre-wrap', backgroundColor: '#f0f0f0', padding: '0.5rem', borderRadius: '4px' }}>
+                {q.answer || "아직 답변이 없습니다."}
+              </p>
             </div>
           </li>
         ))}

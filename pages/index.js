@@ -1,8 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [question, setQuestion] = useState('');
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('questions');
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('questions', JSON.stringify(questions));
+  }, [questions]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +60,7 @@ export default function Home() {
                   style={{ width: '100%', marginTop: '0.25rem' }}
                 />
               </label>
-              {/* 여기에 답변 내용을 텍스트로 보여주기 */}
+              {/* 답변 내용 텍스트로 보여주기 */}
               <p style={{ marginTop: '0.5rem', whiteSpace: 'pre-wrap', backgroundColor: '#f0f0f0', padding: '0.5rem', borderRadius: '4px' }}>
                 {q.answer || "아직 답변이 없습니다."}
               </p>
